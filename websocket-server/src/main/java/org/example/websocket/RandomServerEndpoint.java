@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.websocket.service.RandomSyncService;
 import org.glassfish.tyrus.core.TyrusSession;
+import redis.clients.jedis.JedisPooled;
 
 /**
  * 1 instance per client
@@ -21,7 +22,9 @@ import org.glassfish.tyrus.core.TyrusSession;
 public class RandomServerEndpoint {
 
     private static final Logger logger = LogManager.getLogger(RandomServerEndpoint.class);
-    private static final RandomSyncService randomSyncService = new RandomSyncService();
+
+    private static final JedisPooled jedis = new JedisPooled("localhost", 6379);
+    private static final RandomSyncService randomSyncService = new RandomSyncService(jedis);
 
     // Hashtable is not enough for synchronization between method calls
     private static final Hashtable<String, String> occupiedIP2SessionId = new Hashtable<>();

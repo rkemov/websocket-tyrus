@@ -14,7 +14,7 @@ import org.glassfish.tyrus.client.ClientManager;
 public class AppHighloadSingleClient {
     private static final Logger logger = LogManager.getLogger(AppHighloadSingleClient.class);
 
-    // send 10000 requests
+    // 1 client send 10000 requests
     public static void main(String[] args) {
         ClientManager client = ClientManager.createClient();
         try {

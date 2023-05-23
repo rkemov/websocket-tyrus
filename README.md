@@ -6,6 +6,7 @@
 Чтобы гарантировать уникальность случайных чисел независимо от количества нод сервера и ребутов, используется переменная lowerBound в Redis.
 Все ноды должны быть подключены к одному Редису. Каждый сервер при старте будет читать из Редиса lowerBound и использовать интервал случайных чисел 
 ОТ lowerBound ДО lowerBound + randomizeInterval (константа).
+Проверка уникальных IP в классе org.example.websocket.RandomServerEndpoint.
 1) Можно использовать IntelliJ Idea
 2) На всякий случай инструкция по установке Redis на docker:
    https://koukia.ca/installing-redis-on-windows-using-docker-containers-7737d2ebc25e 

@@ -26,18 +26,23 @@ public class RandomSyncService {
     // CopyOnWriteArraySet is not enough for synchronization between method calls
     private static final HashSet<BigInteger> occupiedIds = new HashSet<>();
 
-    public RandomSyncService() {
-        jedis = new JedisPooled("localhost", 6379);
+    public RandomSyncService(JedisPooled jedis) {
+        this.jedis = jedis;
         lowerBound = getBoundFromRedis();
         saveBoundToRedis(lowerBound + randomizeInterval);
     }
 
+    public int getRandomizeInterval() {
+        return randomizeInterval;
+    }
+
     public long getBoundFromRedis() {
-        logger.debug("BoundFromRedis: " + jedis.get(LOWER_BOUND));
-        if(jedis.get(LOWER_BOUND) == null){
+        String actualBound = jedis.get(LOWER_BOUND);
+        logger.debug("BoundFromRedis: {}", actualBound);
+        if(actualBound == null){
             return 0;
         }
-        return Long.parseLong(jedis.get(LOWER_BOUND));
+        return Long.parseLong(actualBound);
     }
 
     public long getLowerBound() {
