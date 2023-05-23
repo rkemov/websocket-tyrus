@@ -16,9 +16,8 @@
 ```
 3) Запустим докер, затем запустим контейнер командой - по умолчанию порт 6379. 
 ```
-docker run -p 6379:6379 --name some-redis -d redis
+docker run --rm -p 6379:6379 --name some-redis -d redis
 ```
-При последующих запусках Редис контейнера может понадобиться удаление старого контейнера.
 4) Запускаем Сервер в классе org.example.websocket.AppServer
 Он запустится по адресу ws://localhost:8033/webs/app
 5) Затем можно запускать любые клиенты методом main:
@@ -26,6 +25,7 @@ docker run -p 6379:6379 --name some-redis -d redis
    2) 10000 клиентов, каждый из которых отправляет запрос раз в секунду. org.example.websocket.AppHighloadMultiClient
    3) Один клиент с 10000 моментальных запросов. org.example.websocket.AppHighloadSingleClient
 Можно собрать клиент в виде jar.
-6) Unit test только для сервиса org.example.websocket.service.RandomSyncService
 
+# Tests
+Unit test только для сервиса org.example.websocket.service.RandomSyncService
 Адреса и прочие настройки пока не выносил в переменные 
